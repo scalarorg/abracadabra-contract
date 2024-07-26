@@ -1,3 +1,6 @@
+## Description
+Solidity code and scripts for deploying and interacting with Abracadabra
+
 ## Sepolia Contract Address
 
 **ScalarCoin**: "0xB5065Df90c390a7c5318f822b0Fa96Cde2f33051"
