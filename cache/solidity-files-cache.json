@@ -2618,6 +2618,1485 @@
       "artifacts": [
         "Clones"
       ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/CauldronFactory.sol": {
+      "lastModificationDate": 1721963928668,
+      "contentHash": "cfcf6cd5e92e45c09e427e10e37e5746",
+      "sourceName": "contracts/CauldronFactory.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/proxy/Clones.sol",
+        "./CauldronV4.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "CauldronFactory"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/CauldronV4.sol": {
+      "lastModificationDate": 1721963928668,
+      "contentHash": "6edb1ad67e3c5715e3678fa91f74ae24",
+      "sourceName": "contracts/CauldronV4.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../lib/solmate/src/auth/Owned.sol",
+        "../lib/BoringSolidity/contracts/interfaces/IERC20.sol",
+        "./interfaces/IOracle.sol",
+        "./interfaces/ISwapperV2.sol",
+        "./interfaces/IBentoBoxV1.sol",
+        "../lib/BoringSolidity/contracts/interfaces/IMasterContract.sol",
+        "../lib/BoringSolidity/contracts/libraries/BoringRebase.sol",
+        "../lib/BoringSolidity/contracts/libraries/BoringMath.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "CauldronV4"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/node_modules/@openzeppelin/contracts/proxy/Clones.sol": {
+      "lastModificationDate": 1721964554960,
+      "contentHash": "3f126cc3806f04f2c7530211ada54b1e",
+      "sourceName": "@openzeppelin/contracts/proxy/Clones.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Clones"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/interfaces/IOracle.sol": {
+      "lastModificationDate": 1721963928670,
+      "contentHash": "17ac858b9b0a601fdef8aab36fbaf555",
+      "sourceName": "contracts/interfaces/IOracle.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "IOracle"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/interfaces/IBentoBoxV1.sol": {
+      "lastModificationDate": 1721963928670,
+      "contentHash": "41ff41428b439b716ba7fb604528dbff",
+      "sourceName": "contracts/interfaces/IBentoBoxV1.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../lib/BoringSolidity/contracts/interfaces/IERC20.sol",
+        "../../lib/BoringSolidity/contracts/libraries/BoringRebase.sol",
+        "./IStrategy.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "IBatchFlashBorrower",
+        "IBentoBoxV1",
+        "IFlashBorrower"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/interfaces/ISwapperV2.sol": {
+      "lastModificationDate": 1721963928670,
+      "contentHash": "b910f44a43091200bbc53f4406e21b4c",
+      "sourceName": "contracts/interfaces/ISwapperV2.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "ISwapperV2"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/solmate/src/auth/Owned.sol": {
+      "lastModificationDate": 1721964917449,
+      "contentHash": "11fec455b72d2743b77d783d6017e1e9",
+      "sourceName": "lib/solmate/src/auth/Owned.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "Owned"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/interfaces/IERC20.sol": {
+      "lastModificationDate": 1721964917392,
+      "contentHash": "39a5e0412608b8207e69f34dfe8bdf13",
+      "sourceName": "lib/BoringSolidity/contracts/interfaces/IERC20.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC20",
+        "IStrictERC20"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/libraries/BoringMath.sol": {
+      "lastModificationDate": 1721964917393,
+      "contentHash": "c7126ecc8db48c8ebc8360928d49017b",
+      "sourceName": "lib/BoringSolidity/contracts/libraries/BoringMath.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "BoringMath",
+        "BoringMath112",
+        "BoringMath128",
+        "BoringMath224",
+        "BoringMath32",
+        "BoringMath64"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/interfaces/IMasterContract.sol": {
+      "lastModificationDate": 1721964917393,
+      "contentHash": "e8683ce0138f26a0713b78997ad5a152",
+      "sourceName": "lib/BoringSolidity/contracts/interfaces/IMasterContract.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IMasterContract"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/libraries/BoringRebase.sol": {
+      "lastModificationDate": 1721964917393,
+      "contentHash": "69d2516727ae24f24f371b0f323a374b",
+      "sourceName": "lib/BoringSolidity/contracts/libraries/BoringRebase.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./BoringMath.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "RebaseLibrary"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1721964555343,
+      "contentHash": "896f68942c3a20e9ae3c3c5bfd3add54",
+      "sourceName": "hardhat/console.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.22 <0.9.0"
+      ],
+      "artifacts": [
+        "console"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/interfaces/IStrategy.sol": {
+      "lastModificationDate": 1721963928670,
+      "contentHash": "46099a3c0250e3799e79e615740e7a3a",
+      "sourceName": "contracts/interfaces/IStrategy.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "IStrategy"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/WETH.sol": {
+      "lastModificationDate": 1721963928669,
+      "contentHash": "c1ac051f664776c3cd3526003bb5d38e",
+      "sourceName": "contracts/WETH.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "hardhat/console.sol",
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "WETH"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+      "lastModificationDate": 1721964555029,
+      "contentHash": "c6375ef25e84c90b3d15f9ec4eef218f",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC20.sol",
+        "./extensions/IERC20Metadata.sol",
+        "../../utils/Context.sol",
+        "../../interfaces/draft-IERC6093.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ERC20"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
+      "lastModificationDate": 1721964554967,
+      "contentHash": "4aefc698f77ecbace7f401257dfe182d",
+      "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC1155Errors",
+        "IERC20Errors",
+        "IERC721Errors"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1721964554961,
+      "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
+      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Context"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+      "lastModificationDate": 1721964555096,
+      "contentHash": "4c02fa6f7ae7b6c289cef80424f0c875",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC20Metadata"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1721964555095,
+      "contentHash": "5517c8678c18eb1a8ba58810e7ca39ca",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC20"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/DegenBox.sol": {
+      "lastModificationDate": 1721963928668,
+      "contentHash": "83661600db78aa42e223de84e1d6d472",
+      "sourceName": "contracts/DegenBox.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../lib/BoringSolidity/contracts/ERC20.sol",
+        "../lib/BoringSolidity/contracts/libraries/BoringERC20.sol",
+        "../lib/BoringSolidity/contracts/libraries/BoringRebase.sol",
+        "../lib/BoringSolidity/contracts/BoringOwnable.sol",
+        "../lib/BoringSolidity/contracts/BoringBatchable.sol",
+        "../lib/BoringSolidity/contracts/libraries/BoringMath.sol",
+        "./interfaces/IStrategy.sol",
+        "./interfaces/IBentoBoxV1.sol",
+        "./interfaces/IWETH.sol",
+        "./mixins/MasterContractManager.sol",
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "DegenBox"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/interfaces/IWETH.sol": {
+      "lastModificationDate": 1721963928670,
+      "contentHash": "bf235a24d12fca1ef077b2dd886c8e2f",
+      "sourceName": "contracts/interfaces/IWETH.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../lib/BoringSolidity/contracts/interfaces/IERC20.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "IWETH",
+        "IWETHAlike"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/mixins/MasterContractManager.sol": {
+      "lastModificationDate": 1721963928671,
+      "contentHash": "c4f26fe0cd559a4664989baf27e2c87f",
+      "sourceName": "contracts/mixins/MasterContractManager.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../lib/BoringSolidity/contracts/BoringOwnable.sol",
+        "../../lib/BoringSolidity/contracts/BoringFactory.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "MasterContractManager"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/ERC20.sol": {
+      "lastModificationDate": 1721964917392,
+      "contentHash": "688ee38b39922e26f7754627ad19838e",
+      "sourceName": "lib/BoringSolidity/contracts/ERC20.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./interfaces/IERC20.sol",
+        "./Domain.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC20",
+        "ERC20Data",
+        "ERC20WithSupply"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/BoringOwnable.sol": {
+      "lastModificationDate": 1721964917392,
+      "contentHash": "97ae985da59b96883c00a834eca1d77e",
+      "sourceName": "lib/BoringSolidity/contracts/BoringOwnable.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BoringOwnable",
+        "BoringOwnableData"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/BoringBatchable.sol": {
+      "lastModificationDate": 1721964917391,
+      "contentHash": "d2de56340bbd6adb74bcab872a537bea",
+      "sourceName": "lib/BoringSolidity/contracts/BoringBatchable.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./interfaces/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BaseBoringBatchable",
+        "BoringBatchable"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/libraries/BoringERC20.sol": {
+      "lastModificationDate": 1721964917393,
+      "contentHash": "fc9be89528dc481e2efc26cd5c93cda0",
+      "sourceName": "lib/BoringSolidity/contracts/libraries/BoringERC20.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../interfaces/IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BoringERC20"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/BoringFactory.sol": {
+      "lastModificationDate": 1721964917391,
+      "contentHash": "e471fbaa25b1dcd7ac470c3a978ba12e",
+      "sourceName": "lib/BoringSolidity/contracts/BoringFactory.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./interfaces/IMasterContract.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "BoringFactory"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/lib/BoringSolidity/contracts/Domain.sol": {
+      "lastModificationDate": 1721964917392,
+      "contentHash": "09c8823172ab2170941e34845bd55161",
+      "sourceName": "lib/BoringSolidity/contracts/Domain.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Domain"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/libraries/CauldronLib.sol": {
+      "lastModificationDate": 1721963928671,
+      "contentHash": "d4619db0000b75a7bbe8c2a61cadfd8a",
+      "sourceName": "contracts/libraries/CauldronLib.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../lib/BoringSolidity/contracts/interfaces/IERC20.sol",
+        "../../lib/BoringSolidity/contracts/libraries/BoringRebase.sol",
+        "../../lib/BoringSolidity/contracts/libraries/BoringERC20.sol",
+        "../interfaces/IBentoBoxV1.sol",
+        "../interfaces/ICauldronV2.sol",
+        "../interfaces/ICauldronV3.sol",
+        "../interfaces/ICauldronV4.sol",
+        "../interfaces/IOracle.sol",
+        "./MathLib.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.13"
+      ],
+      "artifacts": [
+        "CauldronLib"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/interfaces/ICauldronV2.sol": {
+      "lastModificationDate": 1721963928670,
+      "contentHash": "866e7230e4ee6ea5170dd19c3418d484",
+      "sourceName": "contracts/interfaces/ICauldronV2.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../lib/BoringSolidity/contracts/interfaces/IERC20.sol",
+        "./IOracle.sol",
+        "../../lib/BoringSolidity/contracts/libraries/BoringRebase.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "ICauldronV2"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/interfaces/ICauldronV3.sol": {
+      "lastModificationDate": 1721963928670,
+      "contentHash": "670087db27f3c1c1e7028e1d342073d8",
+      "sourceName": "contracts/interfaces/ICauldronV3.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ICauldronV2.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "ICauldronV3"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/interfaces/ICauldronV4.sol": {
+      "lastModificationDate": 1721963928670,
+      "contentHash": "d8d64566a13f93eaa485f14a087b6722",
+      "sourceName": "contracts/interfaces/ICauldronV4.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./ICauldronV3.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "ICauldronV4"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/libraries/MathLib.sol": {
+      "lastModificationDate": 1721963928671,
+      "contentHash": "74e10c8fe0a6d47453bd3ec1425823dc",
+      "sourceName": "contracts/libraries/MathLib.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "MathLib"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/sBTC.sol": {
+      "lastModificationDate": 1721963928671,
+      "contentHash": "283a23db2e94b2d49fc4b20a8e4890d9",
+      "sourceName": "contracts/sBTC.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../lib/BoringSolidity/contracts/ERC20.sol",
+        "../lib/BoringSolidity/contracts/BoringOwnable.sol",
+        "../lib/BoringSolidity/contracts/libraries/BoringMath.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "sBTC"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/ScalarCoin.sol": {
+      "lastModificationDate": 1721963928669,
+      "contentHash": "7c6acc6c886c695fe5c087ce0241700b",
+      "sourceName": "contracts/ScalarCoin.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./interfaces/IBentoBoxV1.sol",
+        "../lib/BoringSolidity/contracts/ERC20.sol",
+        "../lib/BoringSolidity/contracts/BoringOwnable.sol",
+        "../lib/BoringSolidity/contracts/libraries/BoringMath.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ScalarCoin"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/lens/MarketLens.sol": {
+      "lastModificationDate": 1721963928670,
+      "contentHash": "e299ccaa4c3489da4213998e950c5d3c",
+      "sourceName": "contracts/lens/MarketLens.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../interfaces/IBentoBoxV1.sol",
+        "../interfaces/ICauldronV2.sol",
+        "../interfaces/ICauldronV3.sol",
+        "../../lib/BoringSolidity/contracts/interfaces/IERC20.sol",
+        "../libraries/MathLib.sol",
+        "../libraries/CauldronLib.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.9"
+      ],
+      "artifacts": [
+        "MarketLens"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/oracles/ProxyOracle.sol": {
+      "lastModificationDate": 1721963928671,
+      "contentHash": "20241caafc9ae3054eda8ac8ee9657fa",
+      "sourceName": "contracts/oracles/ProxyOracle.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../lib/solmate/src/auth/Owned.sol",
+        "../interfaces/IOracle.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "ProxyOracle"
+      ]
+    },
+    "/Users/admin/code/ethereum-smartcontract/contracts/oracles/FixedPriceOracle.sol": {
+      "lastModificationDate": 1721963928671,
+      "contentHash": "840cf928bdab676b973b2c05b18efeea",
+      "sourceName": "contracts/oracles/FixedPriceOracle.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../../lib/solmate/src/auth/Owned.sol",
+        "../interfaces/IOracle.sol"
+      ],
+      "versionPragmas": [
+        ">=0.8.0"
+      ],
+      "artifacts": [
+        "FixedPriceOracle"
+      ]
     }
   }
 }
