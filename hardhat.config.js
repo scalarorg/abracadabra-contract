@@ -17,5 +17,9 @@ module.exports = {
       url: "https://eth-sepolia.g.alchemy.com/v2/nNbspp-yjKP9GtAcdKi8xcLnBTptR2Zx",
       accounts: [process.env.ETHEREUM_PRIVATE_KEY],
     },
+    local: {
+      url: "http://localhost:8545",
+      accounts: [process.env.PRIVATE_KEY]
+    }
   },
 };

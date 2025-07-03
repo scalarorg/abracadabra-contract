@@ -2,7 +2,8 @@
   "scripts": {
     "test": "hardhat test",
     "build": "hardhat compile",
-    "deploy": "hardhat run scripts/deploy.js --network sepolia"
+    "deploy": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:local": "hardhat run scripts/deploy.js --network local"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.3",

@@ -26,7 +26,7 @@ contract sBTC is ERC20, BoringOwnable {
     // ERC20 'variables'
 
     string public constant symbol = "sBTC";
-    string public constant name = "Staked BTC";
+    string public constant name = "Scalar BTC";
     uint8 public constant decimals = 18;
     uint256 public override totalSupply;
 

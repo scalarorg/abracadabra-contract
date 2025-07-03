@@ -21,12 +21,12 @@ import {BoringMath} from "boring-solidity/contracts/libraries/BoringMath.sol";
 /// @dev This contract allows contract calls to any contract (except BentoBox)
 /// from arbitrary callers thus, don't trust calls from this contract in any circumstances.
 
-contract ScalarCoin is ERC20, BoringOwnable {
+contract StableCoin is ERC20, BoringOwnable {
     using BoringMath for uint256;
     // ERC20 'variables'
 
-    string public constant symbol = "SCL";
-    string public constant name = "Scalar Coin";
+    string public constant symbol = "sUSD";
+    string public constant name = "Scalar USD";
     uint8 public constant decimals = 18;
     uint256 public override totalSupply;
 
@@ -41,7 +41,7 @@ contract ScalarCoin is ERC20, BoringOwnable {
     // uint256 private constant MINTING_PRECISION = 1e5;
 
     function mint(address to, uint256 amount) public onlyOwner {
-        require(to != address(0), "SCL: no mint to zero address");
+        require(to != address(0), "sUSD: no mint to zero address");
 
         // // Limits the amount minted per period to a convergence function, with the period duration restarting on every mint
         // uint256 totalMintedAmount = uint256(lastMint.time < block.timestamp - MINTING_PERIOD ? 0 : lastMint.amount).add(amount);
@@ -61,7 +61,7 @@ contract ScalarCoin is ERC20, BoringOwnable {
     }
 
     function burn(uint256 amount) public {
-        require(amount <= balanceOf[msg.sender], "SCL: not enough");
+        require(amount <= balanceOf[msg.sender], "sUSD: not enough");
 
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
