@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "postinstall": "git submodule update --init --recursive"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.3",
