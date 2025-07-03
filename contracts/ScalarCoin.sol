@@ -12,16 +12,19 @@
 // BoringCrypto, 0xMerlin
 
 pragma solidity ^0.8.0;
-import {IERC20,IBentoBoxV1} from "./interfaces/IBentoBoxV1.sol";
-import {ERC20} from "../lib/BoringSolidity/contracts/ERC20.sol";
-import {BoringOwnable} from "../lib/BoringSolidity/contracts/BoringOwnable.sol";
-import {BoringMath} from "../lib/BoringSolidity/contracts/libraries/BoringMath.sol"; 
+
+import {IERC20, IBentoBoxV1} from "./interfaces/IBentoBoxV1.sol";
+import {ERC20} from "boring-solidity/contracts/ERC20.sol";
+import {BoringOwnable} from "boring-solidity/contracts/BoringOwnable.sol";
+import {BoringMath} from "boring-solidity/contracts/libraries/BoringMath.sol";
 /// @title Cauldron
 /// @dev This contract allows contract calls to any contract (except BentoBox)
 /// from arbitrary callers thus, don't trust calls from this contract in any circumstances.
+
 contract ScalarCoin is ERC20, BoringOwnable {
     using BoringMath for uint256;
     // ERC20 'variables'
+
     string public constant symbol = "SCL";
     string public constant name = "Scalar Coin";
     uint8 public constant decimals = 18;

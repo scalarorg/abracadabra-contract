@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import {IERC20} from "../../lib/BoringSolidity/contracts/interfaces/IERC20.sol";
-import {Rebase} from "../../lib/BoringSolidity/contracts/libraries/BoringRebase.sol";
+import {IERC20} from "boring-solidity/contracts/interfaces/IERC20.sol";
+import {Rebase} from "boring-solidity/contracts/libraries/BoringRebase.sol";
 import {IStrategy} from "./IStrategy.sol";
 
 interface IFlashBorrower {
@@ -12,13 +12,7 @@ interface IFlashBorrower {
     /// @param amount of the `token` that is loaned.
     /// @param fee The fee that needs to be paid on top for this loan. Needs to be the same as `token`.
     /// @param data Additional data that was passed to the flashloan function.
-    function onFlashLoan(
-        address sender,
-        IERC20 token,
-        uint256 amount,
-        uint256 fee,
-        bytes calldata data
-    ) external;
+    function onFlashLoan(address sender, IERC20 token, uint256 amount, uint256 fee, bytes calldata data) external;
 }
 
 interface IBatchFlashBorrower {
@@ -40,7 +34,10 @@ interface IBatchFlashBorrower {
 interface IBentoBoxV1 {
     function balanceOf(IERC20, address) external view returns (uint256);
 
-    function batch(bytes[] calldata calls, bool revertOnFail) external payable returns (bool[] memory successes, bytes[] memory results);
+    function batch(bytes[] calldata calls, bool revertOnFail)
+        external
+        payable
+        returns (bool[] memory successes, bytes[] memory results);
 
     function batchFlashLoan(
         IBatchFlashBorrower borrower,
@@ -52,33 +49,17 @@ interface IBentoBoxV1 {
 
     function claimOwnership() external;
 
-    function flashLoan(
-        IFlashBorrower borrower,
-        address receiver,
-        IERC20 token,
-        uint256 amount,
-        bytes calldata data
-    ) external;
+    function flashLoan(IFlashBorrower borrower, address receiver, IERC20 token, uint256 amount, bytes calldata data)
+        external;
 
-    function deploy(
-        address masterContract,
-        bytes calldata data,
-        bool useCreate2
-    ) external payable returns (address);
+    function deploy(address masterContract, bytes calldata data, bool useCreate2) external payable returns (address);
 
-    function deposit(
-        IERC20 token_,
-        address from,
-        address to,
-        uint256 amount,
-        uint256 share
-    ) external payable returns (uint256 amountOut, uint256 shareOut);
+    function deposit(IERC20 token_, address from, address to, uint256 amount, uint256 share)
+        external
+        payable
+        returns (uint256 amountOut, uint256 shareOut);
 
-    function harvest(
-        IERC20 token,
-        bool balance,
-        uint256 maxChangeAmount
-    ) external;
+    function harvest(IERC20 token, bool balance, uint256 maxChangeAmount) external;
 
     function masterContractApproved(address, address) external view returns (bool);
 
@@ -125,55 +106,25 @@ interface IBentoBoxV1 {
     function strategyData(IERC20)
         external
         view
-        returns (
-            uint64 strategyStartDate,
-            uint64 targetPercentage,
-            uint128 balance
-        );
+        returns (uint64 strategyStartDate, uint64 targetPercentage, uint128 balance);
 
-    function toAmount(
-        IERC20 token,
-        uint256 share,
-        bool roundUp
-    ) external view returns (uint256 amount);
+    function toAmount(IERC20 token, uint256 share, bool roundUp) external view returns (uint256 amount);
 
-    function toShare(
-        IERC20 token,
-        uint256 amount,
-        bool roundUp
-    ) external view returns (uint256 share);
+    function toShare(IERC20 token, uint256 amount, bool roundUp) external view returns (uint256 share);
 
     function totals(IERC20) external view returns (Rebase memory totals_);
 
-    function transfer(
-        IERC20 token,
-        address from,
-        address to,
-        uint256 share
-    ) external;
+    function transfer(IERC20 token, address from, address to, uint256 share) external;
 
-    function transferMultiple(
-        IERC20 token,
-        address from,
-        address[] calldata tos,
-        uint256[] calldata shares
-    ) external;
+    function transferMultiple(IERC20 token, address from, address[] calldata tos, uint256[] calldata shares) external;
 
-    function transferOwnership(
-        address newOwner,
-        bool direct,
-        bool renounce
-    ) external;
+    function transferOwnership(address newOwner, bool direct, bool renounce) external;
 
     function whitelistMasterContract(address masterContract, bool approved) external;
 
     function whitelistedMasterContracts(address) external view returns (bool);
 
-    function withdraw(
-        IERC20 token_,
-        address from,
-        address to,
-        uint256 amount,
-        uint256 share
-    ) external returns (uint256 amountOut, uint256 shareOut);
+    function withdraw(IERC20 token_, address from, address to, uint256 amount, uint256 share)
+        external
+        returns (uint256 amountOut, uint256 shareOut);
 }

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {IERC20} from "../../lib/BoringSolidity/contracts/interfaces/IERC20.sol";
-import {RebaseLibrary, Rebase} from "../../lib/BoringSolidity/contracts/libraries/BoringRebase.sol";
-import {BoringERC20} from "../../lib/BoringSolidity/contracts/libraries/BoringERC20.sol";
+import {IERC20} from "boring-solidity/contracts/interfaces/IERC20.sol";
+import {RebaseLibrary, Rebase} from "boring-solidity/contracts/libraries/BoringRebase.sol";
+import {BoringERC20} from "boring-solidity/contracts/libraries/BoringERC20.sol";
 import {IBentoBoxV1} from "../interfaces/IBentoBoxV1.sol";
 import {ICauldronV2} from "../interfaces/ICauldronV2.sol";
 import {ICauldronV3} from "../interfaces/ICauldronV3.sol";
@@ -27,7 +27,11 @@ library CauldronLib {
         return uint64((interestBips * 316880878) / 100); // 316880878 is the precomputed integral part of 1e18 / (36525 * 3600 * 24)
     }
 
-    function getInterestPerYearFromInterestPerSecond(uint64 interestPerSecond) internal pure returns (uint64 interestPerYearBips) {
+    function getInterestPerYearFromInterestPerSecond(uint64 interestPerSecond)
+        internal
+        pure
+        returns (uint64 interestPerYearBips)
+    {
         return (interestPerSecond * 100) / 316880878;
     }
 
@@ -37,13 +41,18 @@ library CauldronLib {
     }
 
     // total borrow with on-fly accrued interests
-    function getTotalBorrowWithAccruedInterests(ICauldronV2 cauldron) internal view returns (Rebase memory totalBorrow) {
+    function getTotalBorrowWithAccruedInterests(ICauldronV2 cauldron)
+        internal
+        view
+        returns (Rebase memory totalBorrow)
+    {
         totalBorrow = cauldron.totalBorrow();
-        (uint64 lastAccrued, , uint64 INTEREST_PER_SECOND) = cauldron.accrueInfo();
+        (uint64 lastAccrued,, uint64 INTEREST_PER_SECOND) = cauldron.accrueInfo();
         uint256 elapsedTime = block.timestamp - lastAccrued;
 
         if (elapsedTime != 0 && totalBorrow.base != 0) {
-            totalBorrow.elastic = totalBorrow.elastic + uint128((uint256(totalBorrow.elastic) * INTEREST_PER_SECOND * elapsedTime) / 1e18);
+            totalBorrow.elastic =
+                totalBorrow.elastic + uint128((uint256(totalBorrow.elastic) * INTEREST_PER_SECOND * elapsedTime) / 1e18);
         }
     }
 
@@ -53,7 +62,11 @@ library CauldronLib {
         return oracle.peekSpot(oracleData);
     }
 
-    function getUserCollateral(ICauldronV2 cauldron, address account) internal view returns (uint256 amount, uint256 value) {
+    function getUserCollateral(ICauldronV2 cauldron, address account)
+        internal
+        view
+        returns (uint256 amount, uint256 value)
+    {
         IBentoBoxV1 bentoBox = IBentoBoxV1(cauldron.bentoBox());
         uint256 share = cauldron.userCollateralShare(account);
 
@@ -61,10 +74,7 @@ library CauldronLib {
         value = (amount * EXCHANGE_RATE_PRECISION) / getOracleExchangeRate(cauldron);
     }
 
-    function getUserPositionInfo(
-        ICauldronV2 cauldron,
-        address account
-    )
+    function getUserPositionInfo(ICauldronV2 cauldron, address account)
         internal
         view
         returns (
@@ -89,15 +99,13 @@ library CauldronLib {
             IERC20 collateral = cauldron.collateral();
             uint256 collateralPrecision = 10 ** collateral.safeDecimals();
 
-            liquidationPrice =
-                (borrowValue * collateralPrecision ** 2 * 1e5) /
-                COLLATERALIZATION_RATE /
-                collateralAmount /
-                EXCHANGE_RATE_PRECISION;
+            liquidationPrice = (borrowValue * collateralPrecision ** 2 * 1e5) / COLLATERALIZATION_RATE
+                / collateralAmount / EXCHANGE_RATE_PRECISION;
 
             healthFactor = MathLib.subWithZeroFloor(
                 EXCHANGE_RATE_PRECISION,
-                (EXCHANGE_RATE_PRECISION * liquidationPrice * getOracleExchangeRate(cauldron)) / collateralPrecision ** 2
+                (EXCHANGE_RATE_PRECISION * liquidationPrice * getOracleExchangeRate(cauldron))
+                    / collateralPrecision ** 2
             );
         }
     }
@@ -112,11 +120,11 @@ library CauldronLib {
     /// @return adjustedBorrowPart Adjusted borrowPart to take in account position with bad debt where the
     ///                            borrowPart give out more collateral than what the user has.
     /// @return requiredMim MIM amount that the liquidator will need to pay back to get the collateralShare
-    function getLiquidationCollateralAndBorrowAmount(
-        ICauldronV2 cauldron,
-        address account,
-        uint256 borrowPart
-    ) internal view returns (uint256 collateralAmount, uint256 adjustedBorrowPart, uint256 requiredMim) {
+    function getLiquidationCollateralAndBorrowAmount(ICauldronV2 cauldron, address account, uint256 borrowPart)
+        internal
+        view
+        returns (uint256 collateralAmount, uint256 adjustedBorrowPart, uint256 requiredMim)
+    {
         uint256 exchangeRate = getOracleExchangeRate(cauldron);
         Rebase memory totalBorrow = getTotalBorrowWithAccruedInterests(cauldron);
         IBentoBoxV1 box = IBentoBoxV1(cauldron.bentoBox());
@@ -128,8 +136,8 @@ library CauldronLib {
             Rebase memory bentoBoxTotals = box.totals(collateral);
 
             // how much debt can be liquidated
-            uint256 maxBorrowPart = (bentoBoxTotals.toElastic(collateralShare, false) * 1e23) /
-                (cauldron.LIQUIDATION_MULTIPLIER() * exchangeRate);
+            uint256 maxBorrowPart = (bentoBoxTotals.toElastic(collateralShare, false) * 1e23)
+                / (cauldron.LIQUIDATION_MULTIPLIER() * exchangeRate);
             maxBorrowPart = totalBorrow.toBase(maxBorrowPart, false);
 
             if (borrowPart > maxBorrowPart) {
@@ -146,8 +154,8 @@ library CauldronLib {
 
             // how much collateral share the liquidator will get from the given borrow amount
             collateralShare = bentoBoxTotals.toBase(
-                (requiredMim * cauldron.LIQUIDATION_MULTIPLIER() * exchangeRate) /
-                    (LIQUIDATION_MULTIPLIER_PRECISION * EXCHANGE_RATE_PRECISION),
+                (requiredMim * cauldron.LIQUIDATION_MULTIPLIER() * exchangeRate)
+                    / (LIQUIDATION_MULTIPLIER_PRECISION * EXCHANGE_RATE_PRECISION),
                 false
             );
             collateralAmount = box.toAmount(collateral, collateralShare, false);
@@ -155,10 +163,10 @@ library CauldronLib {
 
         // add the sSpell distribution part
         {
-            requiredMim +=
-                ((((requiredMim * cauldron.LIQUIDATION_MULTIPLIER()) / LIQUIDATION_MULTIPLIER_PRECISION) - requiredMim) *
-                    DISTRIBUTION_PART) /
-                DISTRIBUTION_PRECISION;
+            requiredMim += (
+                (((requiredMim * cauldron.LIQUIDATION_MULTIPLIER()) / LIQUIDATION_MULTIPLIER_PRECISION) - requiredMim)
+                    * DISTRIBUTION_PART
+            ) / DISTRIBUTION_PRECISION;
 
             IERC20 mim = cauldron.magicInternetMoney();
 
@@ -183,12 +191,11 @@ library CauldronLib {
         } else if (collateralShare == 0) {
             return false;
         } else {
-            return
-                bentoBox.toAmount(
-                    collateral,
-                    (collateralShare * (EXCHANGE_RATE_PRECISION / COLLATERIZATION_RATE_PRECISION)) * COLLATERIZATION_RATE,
-                    false
-                ) >= (borrowPart * totalBorrow.elastic * exchangeRate) / totalBorrow.base;
+            return bentoBox.toAmount(
+                collateral,
+                (collateralShare * (EXCHANGE_RATE_PRECISION / COLLATERIZATION_RATE_PRECISION)) * COLLATERIZATION_RATE,
+                false
+            ) >= (borrowPart * totalBorrow.elastic * exchangeRate) / totalBorrow.base;
         }
     }
 
@@ -198,9 +205,7 @@ library CauldronLib {
         return (collateralPrecision * collateralPrecision) / getOracleExchangeRate(cauldron);
     }
 
-    function decodeInitData(
-        bytes calldata data
-    )
+    function decodeInitData(bytes calldata data)
         internal
         pure
         returns (
@@ -213,7 +218,14 @@ library CauldronLib {
             uint256 BORROW_OPENING_FEE
         )
     {
-        (collateral, oracle, oracleData, INTEREST_PER_SECOND, LIQUIDATION_MULTIPLIER, COLLATERIZATION_RATE, BORROW_OPENING_FEE) = abi
-            .decode(data, (address, address, bytes, uint64, uint256, uint256, uint256));
+        (
+            collateral,
+            oracle,
+            oracleData,
+            INTEREST_PER_SECOND,
+            LIQUIDATION_MULTIPLIER,
+            COLLATERIZATION_RATE,
+            BORROW_OPENING_FEE
+        ) = abi.decode(data, (address, address, bytes, uint64, uint256, uint256, uint256));
     }
 }

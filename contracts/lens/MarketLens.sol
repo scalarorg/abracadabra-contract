@@ -4,7 +4,7 @@ pragma solidity ^0.8.9;
 import {IBentoBoxV1} from "../interfaces/IBentoBoxV1.sol";
 import {ICauldronV2} from "../interfaces/ICauldronV2.sol";
 import {ICauldronV3} from "../interfaces/ICauldronV3.sol";
-import {IERC20} from "../../lib/BoringSolidity/contracts/interfaces/IERC20.sol";
+import {IERC20} from "boring-solidity/contracts/interfaces/IERC20.sol";
 import {MathLib} from "../libraries/MathLib.sol";
 import {CauldronLib} from "../libraries/CauldronLib.sol";
 
@@ -56,7 +56,7 @@ contract MarketLens {
     }
 
     function getInterestPerYear(ICauldronV2 cauldron) public view returns (uint64) {
-        (, , uint64 interestPerSecond) = cauldron.accrueInfo();
+        (,, uint64 interestPerSecond) = cauldron.accrueInfo();
         return CauldronLib.getInterestPerYearFromInterestPerSecond(interestPerSecond);
     }
 
@@ -67,7 +67,11 @@ contract MarketLens {
         mimInBentoBox = bentoBox.toAmount(mim, poolBalance, false);
     }
 
-    function getTokenInBentoBox(IBentoBoxV1 bentoBox, IERC20 token, address account) public view returns (uint256 share, uint256 amount) {
+    function getTokenInBentoBox(IBentoBoxV1 bentoBox, IERC20 token, address account)
+        public
+        view
+        returns (uint256 share, uint256 amount)
+    {
         return (bentoBox.balanceOf(token, account), bentoBox.toAmount(token, share, false));
     }
 
@@ -81,7 +85,7 @@ contract MarketLens {
 
     // Returns the maximum amount that can be borrowed across all users
     function getMaxMarketBorrowForCauldronV3(ICauldronV3 cauldron) public view returns (uint256) {
-        (uint256 totalBorrowLimit, ) = cauldron.borrowLimit();
+        (uint256 totalBorrowLimit,) = cauldron.borrowLimit();
 
         uint256 mimInBentoBox = getMimInBentoBox(cauldron);
         uint256 remainingBorrowLimit = MathLib.subWithZeroFloor(totalBorrowLimit, getTotalBorrowed(cauldron));
@@ -135,16 +139,20 @@ contract MarketLens {
     }
 
     function getUserLtv(ICauldronV2 cauldron, address account) public view returns (uint256 ltvBps) {
-        (ltvBps, , , , , ) = CauldronLib.getUserPositionInfo(cauldron, account);
+        (ltvBps,,,,,) = CauldronLib.getUserPositionInfo(cauldron, account);
     }
 
     function getHealthFactor(ICauldronV2 cauldron, address account, bool isStable) public view returns (uint256) {
-        (, uint256 healthFactor, , , , ) = CauldronLib.getUserPositionInfo(cauldron, account);
+        (, uint256 healthFactor,,,,) = CauldronLib.getUserPositionInfo(cauldron, account);
         return isStable ? healthFactor * 10 : healthFactor;
     }
 
-    function getUserLiquidationPrice(ICauldronV2 cauldron, address account) public view returns (uint256 liquidationPrice) {
-        (, , , , liquidationPrice, ) = CauldronLib.getUserPositionInfo(cauldron, account);
+    function getUserLiquidationPrice(ICauldronV2 cauldron, address account)
+        public
+        view
+        returns (uint256 liquidationPrice)
+    {
+        (,,,, liquidationPrice,) = CauldronLib.getUserPositionInfo(cauldron, account);
     }
 
     function getUserPosition(ICauldronV2 cauldron, address account) public view returns (UserPosition memory) {
@@ -157,21 +165,24 @@ contract MarketLens {
             uint256 collateralAmount
         ) = CauldronLib.getUserPositionInfo(cauldron, account);
 
-        return
-            UserPosition(
-                address(cauldron),
-                address(account),
-                ltvBps,
-                healthFactor,
-                borrowValue,
-                AmountValue({amount: collateralAmount, value: collateralValue}),
-                liquidationPrice
-            );
+        return UserPosition(
+            address(cauldron),
+            address(account),
+            ltvBps,
+            healthFactor,
+            borrowValue,
+            AmountValue({amount: collateralAmount, value: collateralValue}),
+            liquidationPrice
+        );
     }
 
     // Get many user position information at once.
     // Beware of hitting RPC `eth_call` gas limit
-    function getUserPositions(ICauldronV2 cauldron, address[] calldata accounts) public view returns (UserPosition[] memory positions) {
+    function getUserPositions(ICauldronV2 cauldron, address[] calldata accounts)
+        public
+        view
+        returns (UserPosition[] memory positions)
+    {
         positions = new UserPosition[](accounts.length);
         for (uint256 i = 0; i < accounts.length; i++) {
             positions[i] = getUserPosition(cauldron, accounts[i]);
@@ -179,20 +190,19 @@ contract MarketLens {
     }
 
     function getMarketInfoCauldronV2(ICauldronV2 cauldron) public view returns (MarketInfo memory) {
-        return
-            MarketInfo({
-                cauldron: address(cauldron),
-                borrowFee: getBorrowFee(cauldron),
-                maximumCollateralRatio: getMaximumCollateralRatio(cauldron),
-                liquidationFee: getLiquidationFee(cauldron),
-                interestPerYear: getInterestPerYear(cauldron),
-                marketMaxBorrow: getMaxMarketBorrowForCauldronV2(cauldron),
-                userMaxBorrow: getMaxUserBorrowForCauldronV2(cauldron),
-                totalBorrowed: getTotalBorrowed(cauldron),
-                oracleExchangeRate: getOracleExchangeRate(cauldron),
-                collateralPrice: getCollateralPrice(cauldron),
-                totalCollateral: getTotalCollateral(cauldron)
-            });
+        return MarketInfo({
+            cauldron: address(cauldron),
+            borrowFee: getBorrowFee(cauldron),
+            maximumCollateralRatio: getMaximumCollateralRatio(cauldron),
+            liquidationFee: getLiquidationFee(cauldron),
+            interestPerYear: getInterestPerYear(cauldron),
+            marketMaxBorrow: getMaxMarketBorrowForCauldronV2(cauldron),
+            userMaxBorrow: getMaxUserBorrowForCauldronV2(cauldron),
+            totalBorrowed: getTotalBorrowed(cauldron),
+            oracleExchangeRate: getOracleExchangeRate(cauldron),
+            collateralPrice: getCollateralPrice(cauldron),
+            totalCollateral: getTotalCollateral(cauldron)
+        });
     }
 
     function getMarketInfoCauldronV3(ICauldronV3 cauldron) public view returns (MarketInfo memory marketInfo) {
