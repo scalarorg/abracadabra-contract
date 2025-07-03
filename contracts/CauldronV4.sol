@@ -12,7 +12,7 @@
 
 pragma solidity >=0.8.0;
 
-import {Owned} from "../lib/solmate/src/auth/Owned.sol";
+import {Owned} from "solmate/src/auth/Owned.sol";
 import {IERC20} from "boring-solidity/contracts/interfaces/IERC20.sol";
 import {IOracle} from "./interfaces/IOracle.sol";
 import {ISwapperV2} from "./interfaces/ISwapperV2.sol";

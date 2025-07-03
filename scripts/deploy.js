@@ -284,10 +284,10 @@ async function main() {
 
 function saveFrontendFiles(contracts, sBTCMarketAddress) {
   const fs = require("fs");
-  const contractsDir = path.join(__dirname, "..", "frontend", "src", "abis");
+  const abiDir = path.join(__dirname, "..", "abis");
 
-  if (!fs.existsSync(contractsDir)) {
-    fs.mkdirSync(contractsDir);
+  if (!fs.existsSync(abiDir)) {
+    fs.mkdirSync(abiDir);
   }
 
   let contractAddresses = {};
@@ -299,7 +299,7 @@ function saveFrontendFiles(contracts, sBTCMarketAddress) {
     // Save each contract's artifact
     const ContractArtifact = artifacts.readArtifactSync(contract.name);
     fs.writeFileSync(
-      path.join(contractsDir, `${contract.name}.json`),
+      path.join(abiDir, `${contract.name}.json`),
       JSON.stringify(ContractArtifact, null, 2)
     );
   });
@@ -307,7 +307,7 @@ function saveFrontendFiles(contracts, sBTCMarketAddress) {
   contractAddresses["sBTCMarket"] = sBTCMarketAddress;
   // Save all contract addresses in a single file
   fs.writeFileSync(
-    path.join(contractsDir, "contract-addresses.json"),
+    path.join(abiDir, "contract-addresses.json"),
     JSON.stringify(contractAddresses, undefined, 2)
   );
 }

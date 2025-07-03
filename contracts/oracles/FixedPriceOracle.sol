@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import {Owned} from "../../lib/solmate/src/auth/Owned.sol";
+import {Owned} from "solmate/src/auth/Owned.sol";
 import {IOracle} from "../interfaces/IOracle.sol";
 
 contract FixedPriceOracle is IOracle, Owned {
