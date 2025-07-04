@@ -1,9 +1,11 @@
-/=dependencies/BoringSolidity-1.0.0/contracts/
-@BoringSolidity/=dependencies/BoringSolidity-1.0.0/contracts/
-@openzeppelin/=dependencies/openzeppelin-contracts-5.0.2/contracts/
-@solmate/=dependencies/solmate-6.2.0/src/
-BoringSolidity-1.0.0/=dependencies/BoringSolidity-1.0.0/contracts/
-forge-std-1.9.5/=dependencies/forge-std-1.9.5/src/
 forge-std/=dependencies/forge-std-1.9.5/src/
+@openzeppelin/=dependencies/openzeppelin-contracts-5.0.2/contracts/
+@BoringSolidity/=dependencies/BoringSolidity-1.0.0/contracts/
+@solmate/=dependencies/solmate-6.2.0/src/
+@chainlink/=dependencies/chainlink-0.0.1/src/
+/=dependencies/BoringSolidity-1.0.0/contracts/
+BoringSolidity-1.0.0/=dependencies/BoringSolidity-1.0.0/contracts/
+chainlink-0.0.1/=dependencies/chainlink-0.0.1/src/
+forge-std-1.9.5/=dependencies/forge-std-1.9.5/src/
 openzeppelin-contracts-5.0.2/=dependencies/openzeppelin-contracts-5.0.2/
 solmate-6.2.0/=dependencies/solmate-6.2.0/src/

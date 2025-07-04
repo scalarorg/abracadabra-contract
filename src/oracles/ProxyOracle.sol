@@ -43,12 +43,12 @@ contract ProxyOracle is IOracle, Owned {
     }
 
     /// @inheritdoc IOracle
-    function name(bytes calldata) public pure override returns (string memory) {
-        return "Proxy Oracle";
+    function name(bytes calldata) public view override returns (string memory) {
+        return oracleImplementation.name("");
     }
 
     /// @inheritdoc IOracle
-    function symbol(bytes calldata) public pure override returns (string memory) {
-        return "Proxy";
+    function symbol(bytes calldata) public view override returns (string memory) {
+        return oracleImplementation.symbol("");
     }
 }

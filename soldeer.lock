@@ -5,6 +5,12 @@ git = "https://github.com/Abracadabra-money/BoringSolidity.git"
 rev = "16e10d3faa1a5eda32668619b6c560e925d85255"
 
 [[dependencies]]
+name = "chainlink"
+version = "0.0.1"
+git = "https://github.com/smartcontractkit/foundry-chainlink-toolkit.git"
+rev = "d610ec9ef54c325de7de1a5622c19933b2ae26cf"
+
+[[dependencies]]
 name = "forge-std"
 version = "1.9.5"
 git = "https://github.com/foundry-rs/forge-std.git"

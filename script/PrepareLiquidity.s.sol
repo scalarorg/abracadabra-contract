@@ -38,9 +38,9 @@ contract PrepareLiquidityScript is BaseScript {
 
     function run() external broadcast {
         console2.log("Broadcaster:", msg.sender);
-        IMintableBurnableERC20(SBTC).mint(msg.sender, 1000 ether);
-        IMintableBurnableERC20(SUSD).mint(msg.sender, 1e9 ether);
-        IDegenBox(DEGEN_BOX).deposit(IMintableBurnableERC20(SUSD), msg.sender, SBTC_MARKET, 1e9 ether, 0);
+        // IMintableBurnableERC20(SBTC).mint(msg.sender, 1000 ether);
+        // IMintableBurnableERC20(SUSD).mint(msg.sender, 1e9 ether);
+        // IDegenBox(DEGEN_BOX).deposit(IMintableBurnableERC20(SUSD), msg.sender, SBTC_MARKET, 1e9 ether, 0);
 
         uint256 collateralPrice = IMarketLens(MARKET_LENS).getCollateralPrice(ICauldronV2(SBTC_MARKET));
 
