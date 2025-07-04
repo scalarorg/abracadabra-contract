@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import {IERC20} from "boring-solidity/contracts/interfaces/IERC20.sol";
+import { IERC20 } from "@BoringSolidity/interfaces/IERC20.sol";
 
 interface IWETH is IERC20 {
     function deposit() external payable;
@@ -9,4 +9,4 @@ interface IWETH is IERC20 {
     function withdraw(uint256) external;
 }
 
-interface IWETHAlike is IWETH {}
+interface IWETHAlike is IWETH { }

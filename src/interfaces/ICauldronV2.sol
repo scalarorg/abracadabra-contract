@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import {IERC20} from "boring-solidity/contracts/interfaces/IERC20.sol";
-import {IOracle} from "./IOracle.sol";
-import {Rebase} from "boring-solidity/contracts/libraries/BoringRebase.sol";
+import { IERC20 } from "@BoringSolidity/interfaces/IERC20.sol";
+import { IOracle } from "./IOracle.sol";
+import { Rebase } from "@BoringSolidity/libraries/BoringRebase.sol";
 
 interface ICauldronV2 {
     function oracle() external view returns (IOracle);
@@ -12,10 +12,13 @@ interface ICauldronV2 {
 
     function accrueInfo() external view returns (uint64, uint128, uint64);
 
+    // solhint-disable-next-line func-name-mixedcase
     function BORROW_OPENING_FEE() external view returns (uint256);
 
+    // solhint-disable-next-line func-name-mixedcase
     function COLLATERIZATION_RATE() external view returns (uint256);
 
+    // solhint-disable-next-line func-name-mixedcase
     function LIQUIDATION_MULTIPLIER() external view returns (uint256);
 
     function totalCollateralShare() external view returns (uint256);
@@ -40,7 +43,11 @@ interface ICauldronV2 {
 
     function withdrawFees() external;
 
-    function cook(uint8[] calldata actions, uint256[] calldata values, bytes[] calldata datas)
+    function cook(
+        uint8[] calldata actions,
+        uint256[] calldata values,
+        bytes[] calldata datas
+    )
         external
         payable
         returns (uint256 value1, uint256 value2);
@@ -57,7 +64,12 @@ interface ICauldronV2 {
 
     function magicInternetMoney() external view returns (IERC20);
 
-    function liquidate(address[] calldata users, uint256[] calldata maxBorrowParts, address to, address swapper)
+    function liquidate(
+        address[] calldata users,
+        uint256[] calldata maxBorrowParts,
+        address to,
+        address swapper
+    )
         external;
 
     function updateExchangeRate() external returns (bool updated, uint256 rate);

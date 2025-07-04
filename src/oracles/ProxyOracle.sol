@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import {Owned} from "solmate/src/auth/Owned.sol";
-import {IOracle} from "../interfaces/IOracle.sol";
+import { Owned } from "@solmate/auth/Owned.sol";
+import { IOracle } from "../interfaces/IOracle.sol";
 
 /// @title ProxyOracle
 /// @author 0xMerlin
@@ -12,7 +12,7 @@ contract ProxyOracle is IOracle, Owned {
 
     event LogOracleImplementationChange(IOracle indexed oldOracle, IOracle indexed newOracle);
 
-    constructor() Owned(msg.sender) {}
+    constructor() Owned(msg.sender) { }
 
     function changeOracleImplementation(IOracle newOracle) external onlyOwner {
         IOracle oldOracle = oracleImplementation;

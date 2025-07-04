@@ -9,5 +9,7 @@ interface ISwapperV2 {
         uint256 shareToMin,
         uint256 shareFrom,
         bytes calldata data
-    ) external returns (uint256 extraShare, uint256 shareReturned);
+    )
+        external
+        returns (uint256 extraShare, uint256 shareReturned);
 }

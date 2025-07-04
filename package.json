@@ -1,23 +1,39 @@
 {
-  "scripts": {
-    "test": "hardhat test",
-    "build": "hardhat compile",
-    "deploy": "hardhat run scripts/deploy.js --network sepolia",
-    "deploy:local": "hardhat run scripts/deploy.js --network local"
+  "name": "@0xdavid7/foundry-template",
+  "description": "",
+  "version": "1.0.0",
+  "author": {
+    "name": "0xdavid7",
+    "url": "https://github.com/0xdavid7"
   },
   "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.2.3",
-    "@nomiclabs/hardhat-waffle": "^2.0.6",
-    "chai": "^4.3.7",
-    "ethereum-waffle": "^4.0.10",
-    "ethers": "^5.7.2",
-    "hardhat": "^2.22.6"
+    "@types/bun": "^1.2.8",
+    "prettier": "^3.0.0",
+    "prettier-plugin-solidity": "^2.0.0",
+    "solhint": "^5.0.5"
+  },
+  "keywords": [
+    "ethereum",
+    "foundry",
+    "smart-contracts",
+    "solidity",
+    "typescript"
+  ],
+  "private": true,
+  "scripts": {
+    "postinstall": "forge soldeer install",
+    "remappings": "forge remappings > remappings.txt",
+    "clean": "rm -rf cache out",
+    "build": "forge build",
+    "lint": "bun run lint:sol && bun run prettier:check",
+    "lint:sol": "forge fmt --check && bun solhint \"{script,src,test}/**/*.sol\"",
+    "prettier:check": "prettier --check \"**/*.{json,md,yml}\" --ignore-path \".prettierignore\" --write",
+    "prettier:write": "prettier --write \"**/*.{json,md,yml}\" --ignore-path \".prettierignore\"",
+    "test": "forge test",
+    "test:coverage": "forge coverage",
+    "test:coverage:report": "forge coverage --report lcov && genhtml lcov.info --branch-coverage --output-dir coverage"
   },
   "dependencies": {
-    "boring-solidity": "https://github.com/Abracadabra-money/BoringSolidity.git#16e10d3faa1a5eda32668619b6c560e925d85255",
-    "@nomicfoundation/hardhat-network-helpers": "^1.0.11",
-    "@openzeppelin/contracts": "^5.0.2",
-    "dotenv": "^16.4.5",
-    "solmate": "^6.8.0"
+    "viem": "^2.31.6"
   }
 }

@@ -1,4 +1,27 @@
-node_modules
-.env
+# directories
 cache
-artifacts
+coverage
+node_modules
+out
+
+# files
+.env
+*.env
+*.env.local
+*.env.test*
+*.log
+.DS_Store
+.pnp.*
+lcov.info
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# broadcasts
+!broadcast
+broadcast/*
+broadcast/*/31337/
+broadcast/*/1337/
+broadcast/*/11155111/
+
+dependencies

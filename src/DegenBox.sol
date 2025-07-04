@@ -20,17 +20,16 @@ pragma solidity >=0.8.0;
 // solhint-disable avoid-low-level-calls
 // solhint-disable not-rely-on-time
 // solhint-disable no-inline-assembly
-import {IERC20, ERC20} from "boring-solidity/contracts/ERC20.sol";
-import {BoringERC20} from "boring-solidity/contracts/libraries/BoringERC20.sol";
-import {RebaseLibrary, Rebase} from "boring-solidity/contracts/libraries/BoringRebase.sol";
-import {BoringOwnable} from "boring-solidity/contracts/BoringOwnable.sol";
-import {BoringBatchable} from "boring-solidity/contracts/BoringBatchable.sol";
-import {BoringMath, BoringMath128} from "boring-solidity/contracts/libraries/BoringMath.sol";
-import {IStrategy} from "./interfaces/IStrategy.sol";
-import {IBentoBoxV1, IFlashBorrower, IBatchFlashBorrower} from "./interfaces/IBentoBoxV1.sol";
-import {IWETH} from "./interfaces/IWETH.sol";
-import {MasterContractManager} from "./mixins/MasterContractManager.sol";
-import "hardhat/console.sol";
+import { IERC20, ERC20 } from "@BoringSolidity/ERC20.sol";
+import { BoringERC20 } from "@BoringSolidity/libraries/BoringERC20.sol";
+import { RebaseLibrary, Rebase } from "@BoringSolidity/libraries/BoringRebase.sol";
+import { BoringOwnable } from "@BoringSolidity/BoringOwnable.sol";
+import { BoringBatchable } from "@BoringSolidity/BoringBatchable.sol";
+import { BoringMath, BoringMath128 } from "@BoringSolidity/libraries/BoringMath.sol";
+import { IStrategy } from "./interfaces/IStrategy.sol";
+import { IBentoBoxV1, IFlashBorrower, IBatchFlashBorrower } from "./interfaces/IBentoBoxV1.sol";
+import { IWETH } from "./interfaces/IWETH.sol";
+import { MasterContractManager } from "./mixins/MasterContractManager.sol";
 /// @title DegenBox
 /// @author BoringCrypto, Keno
 /// @notice The BentoBox is a vault for tokens. The stored tokens can be flash loaned and used in strategies.
@@ -80,7 +79,7 @@ contract DegenBox is MasterContractManager, BoringBatchable {
 
     // V2 - Can they be private?
     // V2: Private to save gas, to verify it's correct, check the constructor arguments
-    IERC20 internal immutable wethToken;
+    IERC20 internal immutable WETH;
 
     IERC20 private constant USE_ETHEREUM = IERC20(address(0));
     uint256 private constant FLASH_LOAN_FEE = 50; // 0.05%
@@ -108,11 +107,11 @@ contract DegenBox is MasterContractManager, BoringBatchable {
     // ******************* //
 
     constructor(IERC20 wethToken_) {
-        wethToken = wethToken_;
+        WETH = wethToken_;
         _configure();
     }
 
-    function _configure() internal virtual {}
+    function _configure() internal virtual { }
 
     // ***************** //
     // *** MODIFIERS *** //
@@ -120,9 +119,11 @@ contract DegenBox is MasterContractManager, BoringBatchable {
 
     /// Modifier to check if the msg.sender is allowed to use funds belonging to the 'from' address.
     /// If 'from' is msg.sender, it's allowed.
-    /// If 'from' is the BentoBox itself, it's allowed. Any ETH, token balances (above the known balances) or BentoBox balances
+    /// If 'from' is the BentoBox itself, it's allowed. Any ETH, token balances (above the known balances) or BentoBox
+    /// balances
     /// can be taken by anyone.
-    /// This is to enable skimming, not just for deposits, but also for withdrawals or transfers, enabling better composability.
+    /// This is to enable skimming, not just for deposits, but also for withdrawals or transfers, enabling better
+    /// composability.
     /// If 'from' is a clone of a masterContract AND the 'from' address has approved that masterContract, it's allowed.
     modifier allowed(address from) {
         if (from != msg.sender && from != address(this)) {
@@ -174,7 +175,13 @@ contract DegenBox is MasterContractManager, BoringBatchable {
     /// @param share Token amount represented in shares to deposit. Takes precedence over `amount`.
     /// @return amountOut The amount deposited.
     /// @return shareOut The deposited amount repesented in shares.
-    function deposit(IERC20 token_, address from, address to, uint256 amount, uint256 share)
+    function deposit(
+        IERC20 token_,
+        address from,
+        address to,
+        uint256 amount,
+        uint256 share
+    )
         public
         payable
         allowed(from)
@@ -184,11 +191,10 @@ contract DegenBox is MasterContractManager, BoringBatchable {
         require(to != address(0), "BentoBox: to not set"); // To avoid a bad UI from burning funds
 
         // Effects
-        IERC20 token = token_ == USE_ETHEREUM ? wethToken : token_;
+        IERC20 token = token_ == USE_ETHEREUM ? WETH : token_;
         _onBeforeDeposit(token, from, to, amount, share);
 
         Rebase memory total = totals[token];
-        console.log("token: ", address(token));
         // If a new token gets added, the tokenSupply call checks that this is a deployed contract. Needed for security.
         require(total.elastic != 0 || token.totalSupply() > 0, "BentoBox: No tokens");
         if (share == 0) {
@@ -199,13 +205,15 @@ contract DegenBox is MasterContractManager, BoringBatchable {
                 return (0, 0);
             }
         } else {
-            // amount may be lower than the value of share due to rounding, in that case, add 1 to amount (Always round up)
+            // amount may be lower than the value of share due to rounding, in that case, add 1 to amount (Always round
+            // up)
             amount = total.toElastic(share, true);
         }
 
         // In case of skimming, check that only the skimmable amount is taken.
         // For ETH, the full balance is available, so no need to check.
-        // During flashloans the _tokenBalanceOf is lower than 'reality', so skimming deposits will mostly fail during a flashloan.
+        // During flashloans the _tokenBalanceOf is lower than 'reality', so skimming deposits will mostly fail during a
+        // flashloan.
         require(
             from != address(this) || token_ == USE_ETHEREUM || amount <= _tokenBalanceOf(token).sub(total.elastic),
             "BentoBox: Skim too much"
@@ -219,12 +227,12 @@ contract DegenBox is MasterContractManager, BoringBatchable {
         // During the first deposit, we check that this token is 'real'
         if (token_ == USE_ETHEREUM) {
             // X2 - If there is an error, could it cause a DoS. Like balanceOf causing revert. (SWC-113)
-            // X2: If the WETH implementation is faulty or malicious, it will block adding ETH (but we know the WETH implementation)
-            IWETH(address(wethToken)).deposit{value: amount}();
+            // X2: If the WETH implementation is faulty or malicious, it will block adding ETH (but we know the WETH
+            // implementation)
+            IWETH(address(WETH)).deposit{ value: amount }();
         } else if (from != address(this)) {
             // X2 - If there is an error, could it cause a DoS. Like balanceOf causing revert. (SWC-113)
             // X2: If the token implementation is faulty or malicious, it may block adding tokens. Good.
-            console.log("amount", amount);
             token.safeTransferFrom(from, address(this), amount);
         }
 
@@ -239,7 +247,13 @@ contract DegenBox is MasterContractManager, BoringBatchable {
     /// @param to which user to push the tokens.
     /// @param amount of tokens. Either one of `amount` or `share` needs to be supplied.
     /// @param share Like above, but `share` takes precedence over `amount`.
-    function withdraw(IERC20 token_, address from, address to, uint256 amount, uint256 share)
+    function withdraw(
+        IERC20 token_,
+        address from,
+        address to,
+        uint256 amount,
+        uint256 share
+    )
         public
         allowed(from)
         returns (uint256 amountOut, uint256 shareOut)
@@ -248,10 +262,11 @@ contract DegenBox is MasterContractManager, BoringBatchable {
         require(to != address(0), "BentoBox: to not set"); // To avoid a bad UI from burning funds
 
         // Effects
-        IERC20 token = token_ == USE_ETHEREUM ? wethToken : token_;
+        IERC20 token = token_ == USE_ETHEREUM ? WETH : token_;
         Rebase memory total = totals[token];
         if (share == 0) {
-            // value of the share paid could be lower than the amount paid due to rounding, in that case, add a share (Always round up)
+            // value of the share paid could be lower than the amount paid due to rounding, in that case, add a share
+            // (Always round up)
             share = total.toBase(amount, true);
         } else {
             // amount may be lower than the value of share due to rounding, that's ok
@@ -260,16 +275,17 @@ contract DegenBox is MasterContractManager, BoringBatchable {
         balanceOf[token][from] = balanceOf[token][from].sub(share);
         total.elastic = total.elastic.sub(amount.to128());
         total.base = total.base.sub(share.to128());
-        // There have to be at least 1000 shares left to prevent reseting the share/amount ratio (unless it's fully emptied)
+        // There have to be at least 1000 shares left to prevent reseting the share/amount ratio (unless it's fully
+        // emptied)
         require(total.base >= MINIMUM_SHARE_BALANCE || total.base == 0, "BentoBox: cannot empty");
         totals[token] = total;
 
         // Interactions
         if (token_ == USE_ETHEREUM) {
             // X2, X3: A revert or big gas usage in the WETH contract could block withdrawals, but WETH9 is fine.
-            IWETH(address(wethToken)).withdraw(amount);
+            IWETH(address(WETH)).withdraw(amount);
             // X2, X3: A revert or big gas usage could block, however, the to address is under control of the caller.
-            (bool success,) = to.call{value: amount}("");
+            (bool success,) = to.call{ value: amount }("");
             require(success, "BentoBox: ETH transfer failed");
         } else {
             // X2, X3: A malicious token could block withdrawal of just THAT token.
@@ -306,7 +322,12 @@ contract DegenBox is MasterContractManager, BoringBatchable {
     /// @param shares The amount of `token` in shares for each receiver in `tos`.
     // F3 - Can it be combined with another similar function?
     // F3: This isn't combined with transfer for gas optimization
-    function transferMultiple(IERC20 token, address from, address[] calldata tos, uint256[] calldata shares)
+    function transferMultiple(
+        IERC20 token,
+        address from,
+        address[] calldata tos,
+        uint256[] calldata shares
+    )
         public
         allowed(from)
     {
@@ -326,7 +347,8 @@ contract DegenBox is MasterContractManager, BoringBatchable {
     }
 
     /// @notice Flashloan ability.
-    /// @param borrower The address of the contract that implements and conforms to `IFlashBorrower` and handles the flashloan.
+    /// @param borrower The address of the contract that implements and conforms to `IFlashBorrower` and handles the
+    /// flashloan.
     /// @param receiver Address of the token receiver.
     /// @param token The address of the token to receive.
     /// @param amount of the tokens to receive.
@@ -335,7 +357,13 @@ contract DegenBox is MasterContractManager, BoringBatchable {
     // F5: Not possible to follow this here, reentrancy has been reviewed
     // F6 - Check for front-running possibilities, such as the approve function (SWC-114)
     // F6: Slight grieving possible by withdrawing an amount before someone tries to flashloan close to the full amount.
-    function flashLoan(IFlashBorrower borrower, address receiver, IERC20 token, uint256 amount, bytes calldata data)
+    function flashLoan(
+        IFlashBorrower borrower,
+        address receiver,
+        IERC20 token,
+        uint256 amount,
+        bytes calldata data
+    )
         public
     {
         uint256 fee = amount.mul(FLASH_LOAN_FEE) / FLASH_LOAN_FEE_PRECISION;
@@ -348,7 +376,8 @@ contract DegenBox is MasterContractManager, BoringBatchable {
     }
 
     /// @notice Support for batched flashloans. Useful to request multiple different `tokens` in a single transaction.
-    /// @param borrower The address of the contract that implements and conforms to `IBatchFlashBorrower` and handles the flashloan.
+    /// @param borrower The address of the contract that implements and conforms to `IBatchFlashBorrower` and handles
+    /// the flashloan.
     /// @param receivers An array of the token receivers. A one-to-one mapping with `tokens` and `amounts`.
     /// @param tokens The addresses of the tokens.
     /// @param amounts of the tokens for each receiver.
@@ -363,7 +392,9 @@ contract DegenBox is MasterContractManager, BoringBatchable {
         IERC20[] calldata tokens,
         uint256[] calldata amounts,
         bytes calldata data
-    ) public {
+    )
+        public
+    {
         uint256[] memory fees = new uint256[](tokens.length);
 
         uint256 len = tokens.length;
@@ -508,10 +539,10 @@ contract DegenBox is MasterContractManager, BoringBatchable {
 
     // Contract should be able to receive ETH deposits to support deposit & skim
     // solhint-disable-next-line no-empty-blocks
-    receive() external payable {}
+    receive() external payable { }
 
     ////////////////////////////////////////////////////////////////////////////////////////
     /// EVENTS
     ////////////////////////////////////////////////////////////////////////////////////////
-    function _onBeforeDeposit(IERC20 token, address from, address to, uint256 amount, uint256 share) internal virtual {}
+    function _onBeforeDeposit(IERC20 token, address from, address to, uint256 amount, uint256 share) internal virtual { }
 }

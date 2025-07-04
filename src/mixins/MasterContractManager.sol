@@ -7,8 +7,8 @@ pragma solidity >=0.8.0;
 // solhint-disable avoid-low-level-calls
 // solhint-disable not-rely-on-time
 // solhint-disable no-inline-assembly
-import {BoringOwnable} from "boring-solidity/contracts/BoringOwnable.sol";
-import {BoringFactory} from "boring-solidity/contracts/BoringFactory.sol";
+import { BoringOwnable } from "@BoringSolidity/BoringOwnable.sol";
+import { BoringFactory } from "@BoringSolidity/BoringFactory.sol";
 
 contract MasterContractManager is BoringOwnable, BoringFactory {
     event LogWhiteListMasterContract(address indexed masterContract, bool approved);
@@ -57,7 +57,8 @@ contract MasterContractManager is BoringOwnable, BoringFactory {
         return chainId == DOMAIN_SEPARATOR_CHAIN_ID ? _DOMAIN_SEPARATOR : _calculateDomainSeparator(chainId);
     }
 
-    /// @notice Other contracts need to register with this master contract so that users can approve them for the BentoBox.
+    /// @notice Other contracts need to register with this master contract so that users can approve them for the
+    /// BentoBox.
     function registerProtocol() public {
         masterContractOf[msg.sender] = msg.sender;
         emit LogRegisterProtocol(msg.sender);
@@ -95,7 +96,9 @@ contract MasterContractManager is BoringOwnable, BoringFactory {
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) public {
+    )
+        public
+    {
         // Checks
         require(masterContract != address(0), "MasterCMgr: masterC not set"); // Important for security
 

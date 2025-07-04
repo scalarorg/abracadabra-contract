@@ -13,10 +13,10 @@
 
 pragma solidity ^0.8.0;
 
-import {IERC20, IBentoBoxV1} from "./interfaces/IBentoBoxV1.sol";
-import {ERC20} from "boring-solidity/contracts/ERC20.sol";
-import {BoringOwnable} from "boring-solidity/contracts/BoringOwnable.sol";
-import {BoringMath} from "boring-solidity/contracts/libraries/BoringMath.sol";
+import { IERC20, IBentoBoxV1 } from "./interfaces/IBentoBoxV1.sol";
+import { ERC20 } from "@BoringSolidity/ERC20.sol";
+import { BoringOwnable } from "@BoringSolidity/BoringOwnable.sol";
+import { BoringMath } from "@BoringSolidity/libraries/BoringMath.sol";
 /// @title Cauldron
 /// @dev This contract allows contract calls to any contract (except BentoBox)
 /// from arbitrary callers thus, don't trust calls from this contract in any circumstances.
@@ -25,9 +25,9 @@ contract StableCoin is ERC20, BoringOwnable {
     using BoringMath for uint256;
     // ERC20 'variables'
 
-    string public constant symbol = "sUSD";
-    string public constant name = "Scalar USD";
-    uint8 public constant decimals = 18;
+    string public symbol = "sUSD";
+    string public name = "Scalar USD";
+    uint8 public decimals = 18;
     uint256 public override totalSupply;
 
     // struct Minting {
@@ -43,8 +43,10 @@ contract StableCoin is ERC20, BoringOwnable {
     function mint(address to, uint256 amount) public onlyOwner {
         require(to != address(0), "sUSD: no mint to zero address");
 
-        // // Limits the amount minted per period to a convergence function, with the period duration restarting on every mint
-        // uint256 totalMintedAmount = uint256(lastMint.time < block.timestamp - MINTING_PERIOD ? 0 : lastMint.amount).add(amount);
+        // // Limits the amount minted per period to a convergence function, with the period duration restarting on
+        // every mint
+        // uint256 totalMintedAmount = uint256(lastMint.time < block.timestamp - MINTING_PERIOD ? 0 :
+        // lastMint.amount).add(amount);
         // require(totalSupply == 0 || totalSupply.mul(MINTING_INCREASE) / MINTING_PRECISION >= totalMintedAmount);
 
         // lastMint.time = block.timestamp.to128();

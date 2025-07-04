@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import {IERC20} from "boring-solidity/contracts/interfaces/IERC20.sol";
-import {Rebase} from "boring-solidity/contracts/libraries/BoringRebase.sol";
-import {IStrategy} from "./IStrategy.sol";
+import { IERC20 } from "@BoringSolidity/interfaces/IERC20.sol";
+import { Rebase } from "@BoringSolidity/libraries/BoringRebase.sol";
+import { IStrategy } from "./IStrategy.sol";
 
 interface IFlashBorrower {
     /// @notice The flashloan callback. `amount` + `fee` needs to repayed to msg.sender before this call returns.
@@ -16,7 +16,8 @@ interface IFlashBorrower {
 }
 
 interface IBatchFlashBorrower {
-    /// @notice The callback for batched flashloans. Every amount + fee needs to repayed to msg.sender before this call returns.
+    /// @notice The callback for batched flashloans. Every amount + fee needs to repayed to msg.sender before this call
+    /// returns.
     /// @param sender The address of the invoker of this flashloan.
     /// @param tokens Array of addresses for ERC-20 tokens that is loaned.
     /// @param amounts A one-to-one map to `tokens` that is loaned.
@@ -28,13 +29,17 @@ interface IBatchFlashBorrower {
         uint256[] calldata amounts,
         uint256[] calldata fees,
         bytes calldata data
-    ) external;
+    )
+        external;
 }
 
 interface IBentoBoxV1 {
     function balanceOf(IERC20, address) external view returns (uint256);
 
-    function batch(bytes[] calldata calls, bool revertOnFail)
+    function batch(
+        bytes[] calldata calls,
+        bool revertOnFail
+    )
         external
         payable
         returns (bool[] memory successes, bytes[] memory results);
@@ -45,16 +50,29 @@ interface IBentoBoxV1 {
         IERC20[] calldata tokens,
         uint256[] calldata amounts,
         bytes calldata data
-    ) external;
+    )
+        external;
 
     function claimOwnership() external;
 
-    function flashLoan(IFlashBorrower borrower, address receiver, IERC20 token, uint256 amount, bytes calldata data)
+    function flashLoan(
+        IFlashBorrower borrower,
+        address receiver,
+        IERC20 token,
+        uint256 amount,
+        bytes calldata data
+    )
         external;
 
     function deploy(address masterContract, bytes calldata data, bool useCreate2) external payable returns (address);
 
-    function deposit(IERC20 token_, address from, address to, uint256 amount, uint256 share)
+    function deposit(
+        IERC20 token_,
+        address from,
+        address to,
+        uint256 amount,
+        uint256 share
+    )
         external
         payable
         returns (uint256 amountOut, uint256 shareOut);
@@ -82,7 +100,8 @@ interface IBentoBoxV1 {
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) external;
+    )
+        external;
 
     function registerProtocol() external;
 
@@ -95,7 +114,8 @@ interface IBentoBoxV1 {
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) external;
+    )
+        external;
 
     function setStrategy(IERC20 token, IStrategy newStrategy) external;
 
@@ -124,7 +144,13 @@ interface IBentoBoxV1 {
 
     function whitelistedMasterContracts(address) external view returns (bool);
 
-    function withdraw(IERC20 token_, address from, address to, uint256 amount, uint256 share)
+    function withdraw(
+        IERC20 token_,
+        address from,
+        address to,
+        uint256 amount,
+        uint256 share
+    )
         external
         returns (uint256 amountOut, uint256 shareOut);
 }

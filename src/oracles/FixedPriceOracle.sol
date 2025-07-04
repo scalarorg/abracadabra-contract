@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 
-import {Owned} from "solmate/src/auth/Owned.sol";
-import {IOracle} from "../interfaces/IOracle.sol";
+import { Owned } from "@solmate/auth/Owned.sol";
+import { IOracle } from "../interfaces/IOracle.sol";
 
 contract FixedPriceOracle is IOracle, Owned {
     event LogPriceChanged(uint256 price);
 
-    uint8 public immutable decimals;
+    uint8 public decimals;
     uint256 public price;
     string public desc;
 

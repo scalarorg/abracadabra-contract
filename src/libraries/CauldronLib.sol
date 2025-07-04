@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {IERC20} from "boring-solidity/contracts/interfaces/IERC20.sol";
-import {RebaseLibrary, Rebase} from "boring-solidity/contracts/libraries/BoringRebase.sol";
-import {BoringERC20} from "boring-solidity/contracts/libraries/BoringERC20.sol";
-import {IBentoBoxV1} from "../interfaces/IBentoBoxV1.sol";
-import {ICauldronV2} from "../interfaces/ICauldronV2.sol";
-import {ICauldronV3} from "../interfaces/ICauldronV3.sol";
-import {ICauldronV4} from "../interfaces/ICauldronV4.sol";
-import {IOracle} from "../interfaces/IOracle.sol";
-import {MathLib} from "./MathLib.sol";
+import { IERC20 } from "@BoringSolidity/interfaces/IERC20.sol";
+import { RebaseLibrary, Rebase } from "@BoringSolidity/libraries/BoringRebase.sol";
+import { BoringERC20 } from "@BoringSolidity/libraries/BoringERC20.sol";
+import { IBentoBoxV1 } from "../interfaces/IBentoBoxV1.sol";
+import { ICauldronV2 } from "../interfaces/ICauldronV2.sol";
+import { ICauldronV3 } from "../interfaces/ICauldronV3.sol";
+import { ICauldronV4 } from "../interfaces/ICauldronV4.sol";
+import { IOracle } from "../interfaces/IOracle.sol";
+import { MathLib } from "./MathLib.sol";
 
 library CauldronLib {
     using BoringERC20 for IERC20;
@@ -24,7 +24,8 @@ library CauldronLib {
 
     /// @dev example: 200 is 2% interests
     function getInterestPerSecond(uint256 interestBips) internal pure returns (uint64 interestsPerSecond) {
-        return uint64((interestBips * 316880878) / 100); // 316880878 is the precomputed integral part of 1e18 / (36525 * 3600 * 24)
+        return uint64((interestBips * 316_880_878) / 100); // 316880878 is the precomputed integral part of 1e18 /
+            // (36525 * 3600 * 24)
     }
 
     function getInterestPerYearFromInterestPerSecond(uint64 interestPerSecond)
@@ -32,7 +33,7 @@ library CauldronLib {
         pure
         returns (uint64 interestPerYearBips)
     {
-        return (interestPerSecond * 100) / 316880878;
+        return (interestPerSecond * 100) / 316_880_878;
     }
 
     function getUserBorrowAmount(ICauldronV2 cauldron, address user) internal view returns (uint256 borrowAmount) {
@@ -62,7 +63,10 @@ library CauldronLib {
         return oracle.peekSpot(oracleData);
     }
 
-    function getUserCollateral(ICauldronV2 cauldron, address account)
+    function getUserCollateral(
+        ICauldronV2 cauldron,
+        address account
+    )
         internal
         view
         returns (uint256 amount, uint256 value)
@@ -74,7 +78,10 @@ library CauldronLib {
         value = (amount * EXCHANGE_RATE_PRECISION) / getOracleExchangeRate(cauldron);
     }
 
-    function getUserPositionInfo(ICauldronV2 cauldron, address account)
+    function getUserPositionInfo(
+        ICauldronV2 cauldron,
+        address account
+    )
         internal
         view
         returns (
@@ -110,8 +117,10 @@ library CauldronLib {
         }
     }
 
-    /// @notice the liquidator will get "MIM borrowPart" worth of collateral + liquidation fee incentive but borrowPart needs to be adjusted to take in account
-    /// the sSpell distribution taken off the liquidation fee. This function takes in account the bad debt repayment in case
+    /// @notice the liquidator will get "MIM borrowPart" worth of collateral + liquidation fee incentive but borrowPart
+    /// needs to be adjusted to take in account
+    /// the sSpell distribution taken off the liquidation fee. This function takes in account the bad debt repayment in
+    /// case
     /// the borrowPart give less collateral than it should.
     /// @param cauldron Cauldron contract
     /// @param account Account to liquidate
@@ -120,7 +129,11 @@ library CauldronLib {
     /// @return adjustedBorrowPart Adjusted borrowPart to take in account position with bad debt where the
     ///                            borrowPart give out more collateral than what the user has.
     /// @return requiredMim MIM amount that the liquidator will need to pay back to get the collateralShare
-    function getLiquidationCollateralAndBorrowAmount(ICauldronV2 cauldron, address account, uint256 borrowPart)
+    function getLiquidationCollateralAndBorrowAmount(
+        ICauldronV2 cauldron,
+        address account,
+        uint256 borrowPart
+    )
         internal
         view
         returns (uint256 collateralAmount, uint256 adjustedBorrowPart, uint256 requiredMim)

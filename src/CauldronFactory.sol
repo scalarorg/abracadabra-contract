@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/proxy/Clones.sol";
-import "./CauldronV4.sol";
+import { Clones } from "@openzeppelin/proxy/Clones.sol";
+import { CauldronV4 } from "./CauldronV4.sol";
 
 contract CauldronFactory {
-    address public immutable masterContract;
+    address public masterContract;
 
     event CauldronCloned(address indexed clone);
 
@@ -19,5 +19,4 @@ contract CauldronFactory {
         emit CauldronCloned(clone);
         return clone;
     }
-
 }

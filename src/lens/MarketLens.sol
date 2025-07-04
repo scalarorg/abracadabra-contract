@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-import {IBentoBoxV1} from "../interfaces/IBentoBoxV1.sol";
-import {ICauldronV2} from "../interfaces/ICauldronV2.sol";
-import {ICauldronV3} from "../interfaces/ICauldronV3.sol";
-import {IERC20} from "boring-solidity/contracts/interfaces/IERC20.sol";
-import {MathLib} from "../libraries/MathLib.sol";
-import {CauldronLib} from "../libraries/CauldronLib.sol";
+import { IBentoBoxV1 } from "../interfaces/IBentoBoxV1.sol";
+import { ICauldronV2 } from "../interfaces/ICauldronV2.sol";
+import { ICauldronV3 } from "../interfaces/ICauldronV3.sol";
+import { IERC20 } from "@BoringSolidity/interfaces/IERC20.sol";
+import { MathLib } from "../libraries/MathLib.sol";
+import { CauldronLib } from "../libraries/CauldronLib.sol";
 
 contract MarketLens {
     struct UserPosition {
@@ -67,7 +67,11 @@ contract MarketLens {
         mimInBentoBox = bentoBox.toAmount(mim, poolBalance, false);
     }
 
-    function getTokenInBentoBox(IBentoBoxV1 bentoBox, IERC20 token, address account)
+    function getTokenInBentoBox(
+        IBentoBoxV1 bentoBox,
+        IERC20 token,
+        address account
+    )
         public
         view
         returns (uint256 share, uint256 amount)
@@ -147,7 +151,10 @@ contract MarketLens {
         return isStable ? healthFactor * 10 : healthFactor;
     }
 
-    function getUserLiquidationPrice(ICauldronV2 cauldron, address account)
+    function getUserLiquidationPrice(
+        ICauldronV2 cauldron,
+        address account
+    )
         public
         view
         returns (uint256 liquidationPrice)
@@ -171,14 +178,17 @@ contract MarketLens {
             ltvBps,
             healthFactor,
             borrowValue,
-            AmountValue({amount: collateralAmount, value: collateralValue}),
+            AmountValue({ amount: collateralAmount, value: collateralValue }),
             liquidationPrice
         );
     }
 
     // Get many user position information at once.
     // Beware of hitting RPC `eth_call` gas limit
-    function getUserPositions(ICauldronV2 cauldron, address[] calldata accounts)
+    function getUserPositions(
+        ICauldronV2 cauldron,
+        address[] calldata accounts
+    )
         public
         view
         returns (UserPosition[] memory positions)
